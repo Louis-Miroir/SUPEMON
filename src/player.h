@@ -1,12 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "pokemon.h"
-
 typedef struct {
-    char name[20];
-    int supcoins;
-    Pokemon team[1]; // Pour l'instant, on gère 1 Supémon
+    char name[50];
+    // Ajoutez d'autres champs si nécessaire
 } Player;
 
 void createPlayer();

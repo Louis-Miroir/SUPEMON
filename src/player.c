@@ -9,6 +9,4 @@ void createPlayer() {
     scanf("%s", player.name);
 }
 
-void loadGame(Player *player) {
-    // Implémentez la logique de chargement du jeu ici
-}
+// Supprimez la définition de loadGame ici

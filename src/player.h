@@ -7,6 +7,6 @@ typedef struct {
 } Player;
 
 void createPlayer();
-void loadGame(Player *player);
+int loadGame(Player *player);  // Changer la déclaration en int
 
 #endif

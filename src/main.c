@@ -14,11 +14,12 @@ int main() {
     scanf("%d", &choice);
 
     if (choice == 1) {
-        startNewGame();
+        startNewGame(&player);
     } else if (choice == 2) {
         if (loadGame(&player)) {
             // Continue the game with the loaded player
             printf("Game loaded successfully. Welcome back, %s!\n", player.name);
+            gameLoop(&player);  // Passer le pointeur vers player
         } else {
             printf("Failed to load game.\n");
         }

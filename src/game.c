@@ -3,14 +3,13 @@
 #include <time.h>
 #include <string.h>
 #include "game.h"
-#include "player.h"
-void startNewGame() {
-    char playerName[50];
+
+void startNewGame(Player *player) {
     printf("Enter your name: ");
-    scanf("%s", playerName);
-    printf("Welcome, %s! Your adventure begins now...\n", playerName);
+    scanf("%s", player->name);
+    printf("Welcome, %s! Your adventure begins now...\n", player->name);
     chooseStarter();
-    gameLoop();  
+    gameLoop(player);  // Passer le pointeur vers player
 }
 
 void startWildBattle() {
@@ -26,9 +25,9 @@ void startWildBattle() {
     // Ici, tu devras implémenter la logique du combat (attaques, tours, capture, etc.)
 }
 
-void gameLoop() {
+void gameLoop(Player *player) {
     int choice;
-    Player player;
+
     while (1) {
         printf("\n--- What do you want to do? ---\n");
         printf("1 - Into the Wild (Battle a random Supémon)\n");
@@ -41,7 +40,7 @@ void gameLoop() {
         if (choice == 1) {
             startWildBattle(); 
         } else if (choice == 4) {
-            saveGame(&player);
+            saveGame(player);  // Utiliser le pointeur vers player
             printf("Exiting game...\n");
             exit(0);
         } else {
@@ -91,7 +90,7 @@ void saveGame(Player *player) {
     printf("Game saved successfully.\n");
 }
 
-void loadGame(Player *player) {
+int loadGame(Player *player) {
     FILE *file = fopen("savegame.dat", "rb"); // Mode binaire "rb" = read binary
     if (!file) {
         printf("Failed to open save file.\n");

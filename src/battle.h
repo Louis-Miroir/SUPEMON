@@ -4,7 +4,7 @@
 #include "supemon.h"
 #include "player.h"
 
-void lancerCombat(supemon supemonJoueur, supemonsupemonSauvage, Player *joueur);
+void lancerCombat(supemon *supemonJoueur, supemon *supemonSauvage, Player *joueur);
 void startWildBattle();
 
 #endif

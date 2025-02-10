@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "battle.h"
+#include "supemon.h"
 
 extern Player player; // On utilise le joueur global défini ailleurs
 
@@ -12,9 +13,13 @@ void startWildBattle() {
     }
 
     supemon supemonSauvage = getRandomPokemon();
-    printf("\nUn %s sauvage apparaît !\n", supemonSauvage.name);
+    
+    // Ajuster le niveau du Supémon sauvage pour correspondre à celui du joueur
+    supemonSauvage.level = player.team[0].level;
 
-    if (player.team[0].hp > 0) { // Supposons que le premier Supémon est actif
+    printf("\nUn %s sauvage apparaît ! (Niveau %d)\n", supemonSauvage.name, supemonSauvage.level);
+
+    if (player.team[0].hp > 0) { // Vérifie si le premier Supémon est en état de combattre
         lancerCombat(&player.team[0], &supemonSauvage, &player);
     } else {
         printf("Votre Supémon est K.O. !\n");
@@ -86,10 +91,14 @@ void lancerCombat(supemon *supemonJoueur, supemon *supemonSauvage, Player *joueu
         }
     }
 
-    if (supemonJoueur->hp <= 0) {
-        printf("\nVotre %s est K.O. ! Vous avez perdu le combat.\n", supemonJoueur->name);
-    } else {
+    if (supemonSauvage->hp == 0) {
         printf("\nLe %s sauvage est K.O. ! Vous avez gagné le combat.\n", supemonSauvage->name);
-        // Récompenses en Supcoins et expérience (à implémenter)
+        
+        // Calcul de l'expérience gagnée
+        int expGagnee = (supemonSauvage->level + 1) * 500;  
+        printf("%s gagne %d points d'expérience !\n", supemonJoueur->name, expGagnee);
+        
+        // Ajouter l'expérience et vérifier si un niveau est gagné
+        ajouterExperience(supemonJoueur, expGagnee);
     }
 }

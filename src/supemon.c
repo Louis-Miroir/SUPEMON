@@ -48,9 +48,38 @@ supemon createSupirtle() {
 }
 
 // Générer un Supémon aléatoire
-Pokemon getRandomPokemon() {
+supemon getRandomPokemon() {
     int r = rand() % 3;
     if (r == 0) return createSupmander();
     if (r == 1) return createSupasaur();
     return createSupirtle();
+}
+
+void ajouterExperience(supemon *p, int exp) {
+    p->experience += exp;
+    int expRequis = 500 + (p->level - 1) * 1000;
+
+    while (p->experience >= expRequis) {
+        p->experience -= expRequis;
+        p->level++;
+        printf("%s monte au niveau %d !\n", p->name, p->level);
+
+        // Augmentation des stats de 30% avec arrondi aléatoire
+        p->max_hp = arrondiAleatoire(p->max_hp * 1.3);
+        p->attack = arrondiAleatoire(p->attack * 1.3);
+        p->defense = arrondiAleatoire(p->defense * 1.3);
+        p->evasion = arrondiAleatoire(p->evasion * 1.3);
+        p->accuracy = arrondiAleatoire(p->accuracy * 1.3);
+        p->speed = arrondiAleatoire(p->speed * 1.3);
+
+        // Mise à jour des HP actuels
+        p->hp = p->max_hp;
+
+        expRequis = 500 + (p->level - 1) * 1000;
+    }
+}
+
+// Fonction pour arrondir aléatoirement un nombre
+int arrondiAleatoire(float valeur) {
+    return (rand() % 2 == 0) ? (int)valeur : (int)valeur + 1;
 }

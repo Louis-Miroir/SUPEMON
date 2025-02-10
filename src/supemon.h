@@ -18,4 +18,8 @@ supemon createSupasaur();
 supemon createSupirtle();
 supemon getRandomPokemon(); // Pour générer un adversaire
 
+void ajouterExperience(supemon *p, int exp);
+int arrondiAleatoire(float valeur);
+
+
 #endif

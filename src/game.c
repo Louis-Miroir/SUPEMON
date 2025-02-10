@@ -4,6 +4,8 @@
 #include <string.h>
 #include "game.h"
 #include "battle.h"
+#include "player.h"
+#include "item.h"
 
 void startNewGame(Player *player) {
     printf("Enter your name: ");
@@ -47,9 +49,8 @@ void gameLoop(Player *player) {
     }
 }
 
-void chooseStarter() {
+void chooseStarter(Player *player) {
     int choice;
-    char starter[20];
 
     printf("\nChoose your starter Supémon:\n");
     printf("1 - Supmander (Fire type)\n");
@@ -58,23 +59,26 @@ void chooseStarter() {
     printf("Enter your choice: ");
     scanf("%d", &choice);
 
-    switch (choice) {
-        case 1:
-            strcpy(starter, "Supmander");
-            break;
-        case 2:
-            strcpy(starter, "Supasaur");
-            break;
-        case 3:
-            strcpy(starter, "Supirtle");
-            break;
-        default:
-            printf("Invalid choice, you get Supmander by default.\n");
-            strcpy(starter, "Supmander");
-            break;
+    if (player->team_size < MAX_SUPEMON) {
+        switch (choice) {
+            case 1:
+                player->team[0] = createSupmander();
+                break;
+            case 2:
+                player->team[0] = createSupasaur();
+                break;
+            case 3:
+                player->team[0] = createSupirtle();
+                break;
+            default:
+                printf("Invalid choice, you get Supmander by default.\n");
+                player->team[0] = createSupmander();
+                break;
+        }
+        player->team_size = 1; // Mise à jour de la taille de l'équipe
     }
 
-    printf("\nCongratulations! You chose %s as your starter!\n", starter);
+    printf("\nCongratulations! You chose %s as your starter!\n", player->team[0].name);
 }
 
 void saveGame(Player *player) {

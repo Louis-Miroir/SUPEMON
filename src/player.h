@@ -7,5 +7,6 @@ typedef struct {
 } Player;
 
 void createPlayer();
+void loadGame(Player *player);
 
 #endif

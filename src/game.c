@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "game.h"
-
-
-
+#include "player.h"
 void startNewGame() {
-
     char playerName[50];
     printf("Enter your name: ");
     scanf("%s", playerName);
@@ -28,10 +26,9 @@ void startWildBattle() {
     // Ici, tu devras implémenter la logique du combat (attaques, tours, capture, etc.)
 }
 
-
 void gameLoop() {
     int choice;
-
+    Player player;
     while (1) {
         printf("\n--- What do you want to do? ---\n");
         printf("1 - Into the Wild (Battle a random Supémon)\n");
@@ -44,7 +41,7 @@ void gameLoop() {
         if (choice == 1) {
             startWildBattle(); 
         } else if (choice == 4) {
-            printf("Saving game... (not implemented yet)\n");
+            saveGame(&player);
             printf("Exiting game...\n");
             exit(0);
         } else {
@@ -83,6 +80,25 @@ void chooseStarter() {
     printf("\nCongratulations! You chose %s as your starter!\n", starter);
 }
 
-void loadGame() {
-    printf("Load game feature not implemented yet.\n");
+void saveGame(Player *player) {
+    FILE *file = fopen("savegame.dat", "wb"); // Mode binaire "wb" = write binary
+    if (!file) {
+        printf("Failed to open save file.\n");
+        return;
+    }
+    fwrite(player, sizeof(Player), 1, file);
+    fclose(file);
+    printf("Game saved successfully.\n");
+}
+
+void loadGame(Player *player) {
+    FILE *file = fopen("savegame.dat", "rb"); // Mode binaire "rb" = read binary
+    if (!file) {
+        printf("Failed to open save file.\n");
+        return 0;
+    }
+    fread(player, sizeof(Player), 1, file);
+    fclose(file);
+    printf("Game loaded successfully.\n");
+    return 1;
 }

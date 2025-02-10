@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include "game.h"
+#include "battle.h"
 
 void startNewGame(Player *player) {
     printf("Enter your name: ");
@@ -12,18 +13,6 @@ void startNewGame(Player *player) {
     gameLoop(player);  // Passer le pointeur vers player
 }
 
-void startWildBattle() {
-    printf("\nA wild Supémon appears!\n");
-
-    char *supemons[] = {"Supmander", "Supasaur", "Supirtle"};
-    srand(time(NULL));
-    int randomIndex = rand() % 3;
-
-    printf("It's a wild %s!\n", supemons[randomIndex]);
-    printf("The battle begins...\n");
-
-    // Ici, tu devras implémenter la logique du combat (attaques, tours, capture, etc.)
-}
 
 void gameLoop(Player *player) {
     int choice;

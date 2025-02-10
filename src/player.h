@@ -1,5 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#define MAX_SUPEMON 6  // Limite de l'équipe
+#include "supemon.h"
 
 typedef struct {
     char name[50];
@@ -14,11 +16,12 @@ typedef struct {
         int evasion, baseEvasion;
         int accuracy, baseAccuracy;
         int speed;
-    } team[6];  // Ajoutez un tableau de Supemon pour représenter l'équipe du joueur
-    int teamSize;  // Ajoutez un champ pour la taille de l'équipe
+    } supemon team[MAX_SUPEMON]; 
+    int team_size; 
 } Player;
 
 void createPlayer();
 int loadGame(Player *player);  // Changer la déclaration en int
 
 #endif
+

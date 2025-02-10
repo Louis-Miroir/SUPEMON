@@ -39,6 +39,15 @@ void gameLoop(Player *player) {
 
         if (choice == 1) {
             startWildBattle(); 
+
+        } else if (choice == 2) {
+            printf("Opening shop...\n");
+            openShop(player);  // Utiliser le pointeur vers player
+
+        } else if (choice == 3) {
+            printf("Opening Supémon Center...\n");
+            // openSupemonCenter(player);  // Utiliser le pointeur vers player    
+
         } else if (choice == 4) {
             saveGame(player);  // Utiliser le pointeur vers player
             printf("Exiting game...\n");

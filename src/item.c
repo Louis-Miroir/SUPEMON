@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "shop_center.h"
+#include "player.h"
 
 void openShop(Player* player) {
     int choice;
@@ -51,9 +51,9 @@ void openShop(Player* player) {
 
 void openSupemonCenter(Player* player) {
     printf("\nWelcome to the Supémon Center!\n");
-    for (int i = 0; i < 1; i++) { // Assuming 1 Supémon for now
-        if (player->team[i].hp < player->team[i].max_hp) {
-            player->team[i].hp = player->team[i].max_hp;
+    for (int i = 0; i < player->teamSize; i++) {
+        if (player->team[i].hp < player->team[i].maxHp) {
+            player->team[i].hp = player->team[i].maxHp;
             printf("%s has been healed to full HP!\n", player->team[i].name);
         } else {
             printf("%s is already at full HP!\n", player->team[i].name);

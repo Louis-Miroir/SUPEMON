@@ -1,7 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "player.h"  // Inclure player.h pour accéder à la définition de Player
+#include "player.h"
+#include "item.h"  // Inclure item.h pour accéder aux déclarations de openShop et openSupemonCenter
 
 #define MAX_NAME_LENGTH 50
 #define MAX_SUPEMONS 6
@@ -21,11 +22,11 @@ typedef struct {
 
 // Déclaration des fonctions
 void saveGame(Player *player);
-int loadGame(Player *player);  // Changer la déclaration en int
+int loadGame(Player *player);
 
-void startNewGame();
+void startNewGame(Player *player);
 void startWildBattle();
-void gameLoop(Player *player);  // Modifier pour accepter un pointeur vers Player
+void gameLoop(Player *player);
 void chooseStarter();
 
 #endif

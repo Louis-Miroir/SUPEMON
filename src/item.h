@@ -4,6 +4,6 @@
 #include "player.h"
 
 void openShop(Player* player);
-void openSupemonCenter(Player* player);
+
 
 #endif

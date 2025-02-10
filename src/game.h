@@ -3,5 +3,7 @@
 
 void startNewGame();
 void loadGame();
-
+void startWildBattle();
+void gameLoop();
+void chooseStarter();
 #endif

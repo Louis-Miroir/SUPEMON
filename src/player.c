@@ -12,7 +12,10 @@ void createPlayer() {
     scanf("%s", player.name);
     
 
+    
    
     }
 
+void loadgame() {
    
+}

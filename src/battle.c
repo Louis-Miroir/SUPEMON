@@ -65,7 +65,35 @@ Supemon* changerSupemon(Player *joueur) {
     return &joueur->team[choix - 1];
 }
 
-// Fonction principale pour gérer le combat entre un Supémon du joueur et un Supémon sauvage
+void utiliserObjet(Player *joueur, Supemon *supemon) {
+    int choix;
+    printf("\nChoisissez un objet à utiliser :\n");
+    for (int i = 0; i < joueur->item_count; i++) {
+        printf("%d - %s (Quantité: %d, Effet: %d)\n", i + 1, joueur->items[i].name, joueur->items[i].quantity, joueur->items[i].effect);
+    }
+    printf("Entrez le numéro de l'objet : ");
+    scanf("%d", &choix);
+
+    if (choix < 1 || choix > joueur->item_count || joueur->items[choix - 1].quantity <= 0) {
+        printf("Choix invalide ou objet indisponible !\n");
+        return;
+    }
+
+    supemon->hp += joueur->items[choix - 1].effect;
+    if (supemon->hp > supemon->maxHp) supemon->hp = supemon->maxHp;
+    printf("%s a utilisé %s et a récupéré %d HP !\n", supemon->name, joueur->items[choix - 1].name, joueur->items[choix - 1].effect);
+
+    joueur->items[choix - 1].quantity--;
+
+    // Retirer l'objet de l'inventaire si la quantité est zéro
+    if (joueur->items[choix - 1].quantity == 0) {
+        for (int i = choix - 1; i < joueur->item_count - 1; i++) {
+            joueur->items[i] = joueur->items[i + 1];
+        }
+        joueur->item_count--;
+    }
+}
+
 void lancerCombat(Supemon *supemonJoueur, Supemon *supemonSauvage, Player *joueur) {
     printf("\nUn combat commence entre votre %s et le %s sauvage !\n", supemonJoueur->name, supemonSauvage->name);
 
@@ -73,7 +101,7 @@ void lancerCombat(Supemon *supemonJoueur, Supemon *supemonSauvage, Player *joueu
         printf("\n--- Votre tour ---\n");
         printf("1 - Attaquer\n");
         printf("2 - Changer de Supémon\n");
-        printf("3 - Utiliser un objet (Pas encore implémenté)\n");
+        printf("3 - Utiliser un objet\n");
         printf("4 - Fuir\n");
         printf("5 - Tenter de capturer\n");
         printf("Choisissez une action : ");
@@ -93,6 +121,9 @@ void lancerCombat(Supemon *supemonJoueur, Supemon *supemonSauvage, Player *joueu
                 }
                 break;
             }
+            case 3:
+                utiliserObjet(joueur, supemonJoueur);
+                break;
             case 4:
                 printf("Vous tentez de fuir...\n");
                 if ((rand() % 100) / 100.0 < (float)supemonJoueur->speed / (supemonJoueur->speed + supemonSauvage->speed)) {

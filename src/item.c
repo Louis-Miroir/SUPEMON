@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 #include "player.h"
+#include "item.h"
 
 void openShop(Player* player) {
     int choice;
@@ -20,6 +22,22 @@ void openShop(Player* player) {
                 if (player->supcoins >= 100) {
                     player->supcoins -= 100;
                     printf("Potion purchased!\n");
+                    // Ajouter l'objet à l'inventaire
+                    int found = 0;
+                    for (int i = 0; i < player->item_count; i++) {
+                        if (strcmp(player->items[i].name, "Potion") == 0) {
+                            player->items[i].quantity++;
+                            found = 1;
+                            break;
+                        }
+                    }
+                    if (!found && player->item_count < MAX_ITEMS) {
+                        strcpy(player->items[player->item_count].name, "Potion");
+                        player->items[player->item_count].price = 100;
+                        player->items[player->item_count].effect = 5;
+                        player->items[player->item_count].quantity = 1;
+                        player->item_count++;
+                    }
                 } else {
                     printf("Not enough Supcoins!\n");
                 }
@@ -28,6 +46,22 @@ void openShop(Player* player) {
                 if (player->supcoins >= 300) {
                     player->supcoins -= 300;
                     printf("Super Potion purchased!\n");
+                    // Ajouter l'objet à l'inventaire
+                    int found = 0;
+                    for (int i = 0; i < player->item_count; i++) {
+                        if (strcmp(player->items[i].name, "Super Potion") == 0) {
+                            player->items[i].quantity++;
+                            found = 1;
+                            break;
+                        }
+                    }
+                    if (!found && player->item_count < MAX_ITEMS) {
+                        strcpy(player->items[player->item_count].name, "Super Potion");
+                        player->items[player->item_count].price = 300;
+                        player->items[player->item_count].effect = 10;
+                        player->items[player->item_count].quantity = 1;
+                        player->item_count++;
+                    }
                 } else {
                     printf("Not enough Supcoins!\n");
                 }
@@ -36,6 +70,22 @@ void openShop(Player* player) {
                 if (player->supcoins >= 700) {
                     player->supcoins -= 700;
                     printf("Rare Candy purchased!\n");
+                    // Ajouter l'objet à l'inventaire
+                    int found = 0;
+                    for (int i = 0; i < player->item_count; i++) {
+                        if (strcmp(player->items[i].name, "Rare Candy") == 0) {
+                            player->items[i].quantity++;
+                            found = 1;
+                            break;
+                        }
+                    }
+                    if (!found && player->item_count < MAX_ITEMS) {
+                        strcpy(player->items[player->item_count].name, "Rare Candy");
+                        player->items[player->item_count].price = 700;
+                        player->items[player->item_count].effect = 1;
+                        player->items[player->item_count].quantity = 1;
+                        player->item_count++;
+                    }
                 } else {
                     printf("Not enough Supcoins!\n");
                 }

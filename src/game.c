@@ -5,8 +5,7 @@
 #include "game.h"
 
 void startNewGame(Player *player) {
-    printf("Enter your name: ");
-    scanf("%s", player->name);
+    createPlayer(player);
     printf("Welcome, %s! Your adventure begins now...\n", player->name);
     chooseStarter(player);
     gameLoop(player);

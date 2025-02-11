@@ -9,4 +9,3 @@ void createPlayer() {
     scanf("%s", player.name);
 }
 
-// Supprimez la définition de loadGame ici

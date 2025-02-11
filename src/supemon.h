@@ -1,21 +1,22 @@
-#ifndef supemon_H
-#define supemon_H
+#ifndef SUPEMON_H
+#define SUPEMON_H
 
 typedef struct {
     char name[20];
     int level;
     int experience;
-    int hp, max_hp;
-    int attack, base_attack;
-    int defense, base_defense;
-    int evasion, base_evasion;
-    int accuracy, base_accuracy;
+    int hp, maxHp;
+    int attack, baseAttack;
+    int defense, baseDefense;
+    int evasion, baseEvasion;
+    int accuracy, baseAccuracy;
     int speed;
-} supemon;
+} Supemon;
 
-supemon createSupmander();
-supemon createSupasaur();
-supemon createSupirtle();
-supemon getRandomPokemon(); // Pour générer un adversaire
+Supemon createSupmander();
+Supemon createSupasaur();
+Supemon createSupirtle();
+Supemon getRandomPokemon(); 
+void gainExperience(Supemon *supemon, int experience); 
 
 #endif

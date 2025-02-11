@@ -3,18 +3,14 @@
 #include <time.h>
 #include <string.h>
 #include "game.h"
-#include "battle.h"
-#include "player.h"
-#include "item.h"
 
 void startNewGame(Player *player) {
     printf("Enter your name: ");
     scanf("%s", player->name);
     printf("Welcome, %s! Your adventure begins now...\n", player->name);
-    chooseStarter();
-    gameLoop(player);  // Passer le pointeur vers player
+    chooseStarter(player);
+    gameLoop(player);
 }
-
 
 void gameLoop(Player *player) {
     int choice;
@@ -22,35 +18,33 @@ void gameLoop(Player *player) {
     while (1) {
         printf("\n--- What do you want to do? ---\n");
         printf("1 - Into the Wild (Battle a random Supémon)\n");
-        printf("2 - Shop (Not implemented yet)\n");
-        printf("3 - Supémon Center (Not implemented yet)\n");
+        printf("2 - Shop\n");
+        printf("3 - Supémon Center\n");
         printf("4 - Save & Exit\n");
         printf("Choose an option: ");
         scanf("%d", &choice);
 
         if (choice == 1) {
-            startWildBattle(); 
-
+            startWildBattle(player);
         } else if (choice == 2) {
             printf("Opening shop...\n");
-            openShop(player);  // Utiliser le pointeur vers player
-
+            openShop(player);
         } else if (choice == 3) {
             printf("Opening Supémon Center...\n");
-            // openSupemonCenter(player);  // Utiliser le pointeur vers player    
-
+            openSupemonCenter(player);
         } else if (choice == 4) {
-            saveGame(player);  // Utiliser le pointeur vers player
+            saveGame(player);
             printf("Exiting game...\n");
             exit(0);
         } else {
-            printf("Feature not implemented yet. Try again!\n");
+            printf("Invalid choice. Try again!\n");
         }
     }
 }
 
 void chooseStarter(Player *player) {
     int choice;
+    char starter[20];
 
     printf("\nChoose your starter Supémon:\n");
     printf("1 - Supmander (Fire type)\n");
@@ -59,30 +53,32 @@ void chooseStarter(Player *player) {
     printf("Enter your choice: ");
     scanf("%d", &choice);
 
-    if (player->team_size < MAX_SUPEMON) {
-        switch (choice) {
-            case 1:
-                player->team[0] = createSupmander();
-                break;
-            case 2:
-                player->team[0] = createSupasaur();
-                break;
-            case 3:
-                player->team[0] = createSupirtle();
-                break;
-            default:
-                printf("Invalid choice, you get Supmander by default.\n");
-                player->team[0] = createSupmander();
-                break;
-        }
-        player->team_size = 1; // Mise à jour de la taille de l'équipe
+    switch (choice) {
+        case 1:
+            strcpy(starter, "Supmander");
+            player->team[0] = createSupmander();
+            break;
+        case 2:
+            strcpy(starter, "Supasaur");
+            player->team[0] = createSupasaur();
+            break;
+        case 3:
+            strcpy(starter, "Supirtle");
+            player->team[0] = createSupirtle();
+            break;
+        default:
+            printf("Invalid choice, you get Supmander by default.\n");
+            strcpy(starter, "Supmander");
+            player->team[0] = createSupmander();
+            break;
     }
 
-    printf("\nCongratulations! You chose %s as your starter!\n", player->team[0].name);
+    printf("\nCongratulations! You chose %s as your starter!\n", starter);
+    player->teamSize = 1;
 }
 
 void saveGame(Player *player) {
-    FILE *file = fopen("savegame.dat", "wb"); // Mode binaire "wb" = write binary
+    FILE *file = fopen("savegame.dat", "wb"); 
     if (!file) {
         printf("Failed to open save file.\n");
         return;
@@ -93,7 +89,7 @@ void saveGame(Player *player) {
 }
 
 int loadGame(Player *player) {
-    FILE *file = fopen("savegame.dat", "rb"); // Mode binaire "rb" = read binary
+    FILE *file = fopen("savegame.dat", "rb"); 
     if (!file) {
         printf("Failed to open save file.\n");
         return 0;

@@ -1,10 +1,12 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
-#include "supemon.h"
 #include "player.h"
+#include "supemon.h"
 
-void lancerCombat(supemon *supemonJoueur, supemon *supemonSauvage, Player *joueur);
-void startWildBattle();
+void startWildBattle(Player *player);
+void attaquerSupemon(Supemon *attaquant, Supemon *defenseur, Player *joueur, int isWild); 
+void lancerCombat(Supemon *supemonJoueur, Supemon *supemonSauvage, Player *joueur);
+Supemon* changerSupemon(Player *joueur);
 
 #endif

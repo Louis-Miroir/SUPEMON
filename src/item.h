@@ -7,6 +7,6 @@
 void openShop(Player* player);
 void openSupemonCenter(Player *player);  
 void useRareCandy(Supemon *supemon);
-
+void sellItem(Player* player);
 
 #endif

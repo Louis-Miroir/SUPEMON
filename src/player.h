@@ -16,7 +16,7 @@ typedef struct {
     int supcoins;
     Supemon team[6];
     int teamSize;
-    Item items[MAX_ITEMS];  // Utilisez un tableau statique pour représenter l'inventaire du joueur
+    Item items[MAX_ITEMS];  
     int item_count;
 } Player;
 

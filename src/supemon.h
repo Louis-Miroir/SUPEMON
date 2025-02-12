@@ -3,6 +3,12 @@
 
 typedef struct {
     char name[20];
+    int damage;
+    int effect; 
+} Attack;
+
+typedef struct {
+    char name[20];
     int level;
     int experience;
     int hp, maxHp;
@@ -11,6 +17,7 @@ typedef struct {
     int evasion, baseEvasion;
     int accuracy, baseAccuracy;
     int speed;
+    Attack attacks[2]; 
 } Supemon;
 
 Supemon createSupmander();
@@ -21,7 +28,7 @@ Supemon createSupasaur();
 Supemon createSupirtle();
 Supemon createSuparthur();
 Supemon createSupkachu();
-Supemon getRandomPokemon(); 
-void gainExperience(Supemon *supemon, int experience); 
+Supemon getRandomPokemon(int level); 
+void gainExperience(Supemon *supemon, int experience);
 
 #endif

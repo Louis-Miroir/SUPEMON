@@ -17,7 +17,8 @@ void openShop(Player* player) {
     printf("1. Potion (+5 HP) - 100 Supcoins\n");
     printf("2. Super Potion (+10 HP) - 300 Supcoins\n");
     printf("3. Rare Candy (Level up) - 700 Supcoins\n");
-    printf("4. Exit Shop\n");
+    printf("4. Sell Items\n");
+    printf("5. Exit Shop\n");
 
     while (1) {
         printf("\nEnter your choice: ");
@@ -28,7 +29,7 @@ void openShop(Player* player) {
                 if (player->supcoins >= 100) {
                     player->supcoins -= 100;
                     printf("Potion purchased!\n");
-                    // Ajouter l'objet à l'inventaire
+                   
                     int found = 0;
                     for (int i = 0; i < player->item_count; i++) {
                         if (strcmp(player->items[i].name, "Potion") == 0) {
@@ -52,7 +53,7 @@ void openShop(Player* player) {
                 if (player->supcoins >= 300) {
                     player->supcoins -= 300;
                     printf("Super Potion purchased!\n");
-                    // Ajouter l'objet à l'inventaire
+                   
                     int found = 0;
                     for (int i = 0; i < player->item_count; i++) {
                         if (strcmp(player->items[i].name, "Super Potion") == 0) {
@@ -76,7 +77,7 @@ void openShop(Player* player) {
                 if (player->supcoins >= 700) {
                     player->supcoins -= 700;
                     printf("Rare Candy purchased!\n");
-                    // Ajouter l'objet à l'inventaire
+                  
                     int found = 0;
                     for (int i = 0; i < player->item_count; i++) {
                         if (strcmp(player->items[i].name, "Rare Candy") == 0) {
@@ -97,12 +98,43 @@ void openShop(Player* player) {
                 }
                 break;
             case 4:
+                sellItem(player);
+                break;
+            case 5:
                 printf("Exiting shop...\n");
                 return;
             default:
                 printf("Invalid choice. Try again.\n");
         }
     }
+}
+
+void sellItem(Player* player) {
+    int choice;
+    printf("\nChoose an item to sell:\n");
+    for (int i = 0; i < player->item_count; i++) {
+        printf("%d - %s (Quantity: %d, Sell Price: %d Supcoins)\n", i + 1, player->items[i].name, player->items[i].quantity, player->items[i].price / 2);
+    }
+    printf("Enter the item number to sell: ");
+    scanf("%d", &choice);
+
+    if (choice < 1 || choice > player->item_count || player->items[choice - 1].quantity <= 0) {
+        printf("Invalid choice or item not available!\n");
+        return;
+    }
+
+    player->supcoins += player->items[choice - 1].price / 2;
+    player->items[choice - 1].quantity--;
+
+    
+    if (player->items[choice - 1].quantity == 0) {
+        for (int i = choice - 1; i < player->item_count - 1; i++) {
+            player->items[i] = player->items[i + 1];
+        }
+        player->item_count--;
+    }
+
+    printf("Item sold!\n");
 }
 
 void openSupemonCenter(Player* player) {

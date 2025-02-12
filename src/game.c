@@ -46,9 +46,9 @@ void chooseStarter(Player *player) {
     char starter[20];
 
     printf("\nChoose your starter Supémon:\n");
-    printf("1 - Supmander (Fire type)\n");
-    printf("2 - Supasaur (Grass type)\n");
-    printf("3 - Supirtle (Water type)\n");
+    printf("1 - Supmander \n");
+    printf("2 - Supasaur \n");
+    printf("3 - Supirtle \n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
 

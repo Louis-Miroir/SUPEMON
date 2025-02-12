@@ -4,7 +4,7 @@
 #include <string.h>
 #include "supemon.h"
 
-// Création des Supémons existants
+
 Supemon createSupmander() {
     Supemon p;
     strcpy(p.name, "Supmander");
@@ -16,6 +16,12 @@ Supemon createSupmander() {
     p.evasion = p.baseEvasion = 1;
     p.accuracy = p.baseAccuracy = 2;
     p.speed = 1;
+    strcpy(p.attacks[0].name, "Scratch");
+    p.attacks[0].damage = 3;
+    p.attacks[0].effect = 0;
+    strcpy(p.attacks[1].name, "Growl");
+    p.attacks[1].damage = 0;
+    p.attacks[1].effect = 1; 
     return p;
 }
 
@@ -30,6 +36,12 @@ Supemon createSupasaur() {
     p.evasion = p.baseEvasion = 3;
     p.accuracy = p.baseAccuracy = 2;
     p.speed = 2;
+    strcpy(p.attacks[0].name, "Pound");
+    p.attacks[0].damage = 2;
+    p.attacks[0].effect = 0;
+    strcpy(p.attacks[1].name, "Foliage");
+    p.attacks[1].damage = 0;
+    p.attacks[1].effect = 2;
     return p;
 }
 
@@ -44,6 +56,12 @@ Supemon createSupirtle() {
     p.evasion = p.baseEvasion = 2;
     p.accuracy = p.baseAccuracy = 1;
     p.speed = 2;
+    strcpy(p.attacks[0].name, "Pound");
+    p.attacks[0].damage = 2;
+    p.attacks[0].effect = 0;
+    strcpy(p.attacks[1].name, "Shell");
+    p.attacks[1].damage = 0;
+    p.attacks[1].effect = 3; 
     return p;
 }
 
@@ -58,6 +76,9 @@ Supemon createSupkachu() {
     p.evasion = p.baseEvasion = 2;
     p.accuracy = p.baseAccuracy = 1;
     p.speed = 1;
+    strcpy(p.attacks[0].name, "flash");
+    p.attacks[0].damage = 4;
+    p.attacks[0].effect = 0;
     return p;
 }
 
@@ -72,6 +93,9 @@ Supemon createSupaper() {
     p.evasion = p.baseEvasion = 3;
     p.accuracy = p.baseAccuracy = 1;
     p.speed = 4;
+    strcpy(p.attacks[0].name, "cut");
+    p.attacks[0].damage = 3;
+    p.attacks[0].effect = 0;
     return p;
 }
 
@@ -86,6 +110,9 @@ Supemon createSuparthur() {
     p.evasion = p.baseEvasion = 2;
     p.accuracy = p.baseAccuracy = 1;
     p.speed = 2;
+    strcpy(p.attacks[0].name, "punch");
+    p.attacks[0].damage = 3;
+    p.attacks[0].effect = 0;
     return p;
 }
 
@@ -100,6 +127,9 @@ Supemon createSupnoa() {
     p.evasion = p.baseEvasion = 1;
     p.accuracy = p.baseAccuracy = 1;
     p.speed = 1;
+    strcpy(p.attacks[0].name, "bulletseed");
+    p.attacks[0].damage = 3;
+    p.attacks[0].effect = 0;
     return p;
 }
 
@@ -114,6 +144,9 @@ Supemon createSupenzo() {
     p.evasion = p.baseEvasion = 2;
     p.accuracy = p.baseAccuracy = 1;
     p.speed = 1;
+    strcpy(p.attacks[0].name, "bite");
+    p.attacks[0].damage = 4;
+    p.attacks[0].effect = 0;
     return p;
 }
 
@@ -128,7 +161,7 @@ Supemon getRandomPokemon(int level) {
     else if (r == 6) p = createSupmander();
     else p = createSuparthur();
 
-    // Ajuster le niveau du Supémon sauvage
+   
     for (int i = 1; i < level; i++) {
         gainExperience(&p, 500 + (i - 1) * 1000);
     }

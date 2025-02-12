@@ -6,11 +6,12 @@
 int main() {
     int choice;
     Player player;
-
+    printf("______________________________\n");
     printf("1 - New Game\n");
     printf("2 - Load Game\n");
     printf("3 - Quit\n");
-    printf("Choose an option: ");
+    printf("Choose an option: \n");
+    printf("______________________________\n");
     scanf("%d", &choice);
 
     if (choice == 1) {

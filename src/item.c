@@ -11,6 +11,7 @@ void useRareCandy(Supemon *supemon) {
 
 void openShop(Player* player) {
     int choice;
+    printf("______________________________\n");
     printf("\nWelcome to the Shop!\n");
     printf("You have %d Supcoins.\n", player->supcoins);
     printf("Items available for purchase:\n");
@@ -19,6 +20,7 @@ void openShop(Player* player) {
     printf("3. Rare Candy (Level up) - 700 Supcoins\n");
     printf("4. Sell Items\n");
     printf("5. Exit Shop\n");
+    printf("______________________________\n");
 
     while (1) {
         printf("\nEnter your choice: ");

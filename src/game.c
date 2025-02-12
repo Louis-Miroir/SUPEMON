@@ -15,12 +15,14 @@ void gameLoop(Player *player) {
     int choice;
 
     while (1) {
+
         printf("\n--- What do you want to do? ---\n");
         printf("1 - Into the Wild (Battle a random Supémon)\n");
         printf("2 - Shop\n");
         printf("3 - Supémon Center\n");
         printf("4 - Save & Exit\n");
-        printf("Choose an option: ");
+        printf("Choose an option: \n");
+        printf("______________________________\n");
         scanf("%d", &choice);
 
         if (choice == 1) {
@@ -49,7 +51,8 @@ void chooseStarter(Player *player) {
     printf("1 - Supmander \n");
     printf("2 - Supasaur \n");
     printf("3 - Supirtle \n");
-    printf("Enter your choice: ");
+    printf("Enter your choice: \n");
+    printf("______________________________\n");
     scanf("%d", &choice);
 
     switch (choice) {

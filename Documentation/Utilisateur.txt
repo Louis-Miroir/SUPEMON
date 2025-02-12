@@ -1,0 +1,11 @@
+SUPEMON
+Bienvenue dans SUPEMON, un jeu de combat de créatures où vous pouvez capturer, entraîner et combattre des Supémons.
+
+Il faut d'abord ouvrir un Terminal (Ubuntu)
+	Ensuite vous devrez utiliser la commande: cd /mnt
+		puis: cd /"le chemin en commençant par votre disque jusqu'au dossier contenant le code du jeu" 
+
+Compilez maintenant les fichiers et lancez le jeu avec la commande:  gcc -o main main.c game.c player.c item.c supemon.c battle.c && ./main
+
+
+Vous êtes maintenant prêts à jouer !

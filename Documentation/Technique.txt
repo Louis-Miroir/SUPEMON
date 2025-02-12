@@ -1,0 +1,119 @@
+Fichiers Sources
+
+1. main.c
+Le point d'entrée du programme. Il affiche le menu principal et gère les options de démarrage d'une nouvelle partie, de chargement d'une partie sauvegardée et de sortie du jeu.
+
+2. game.c et game.h
+Contient les fonctions principales pour démarrer une nouvelle partie, gérer la boucle de jeu, choisir un Supémon de départ et sauvegarder/charger le jeu.
+
+3. player.c et player.h
+Gère la création et l'initialisation des joueurs, ainsi que les fonctions de sauvegarde et de chargement des données du joueur.
+(player.h définis les structures Player et Item)
+
+4. item.c et item.h
+Gère les interactions avec les objets, y compris l'achat, la vente et l'utilisation d'objets, ainsi que l'ouverture du centre Supémon.
+
+5. supemon.c et supemon.h
+Contient les définitions et les fonctions pour créer et gérer les Supémons, y compris la création de Supémons sauvages, la génération de Supémons aléatoires et la gestion de l'expérience et des niveaux.
+(supemon.h définis les structures Attack et Supemon)
+
+6. battle.c et battle.h
+Gère les combats entre les Supémons, y compris les attaques, les esquives, les changements de Supémon et l'utilisation d'objets pendant les combats.
+
+
+Résumé des Fonctions
+
+main.c
+------
+int main :
+    Point d'entrée du programme. Affiche le menu principal et gère les options 
+    de démarrage d'une nouvelle partie, de chargement d'une partie sauvegardée 
+    et de sortie du jeu.
+
+game.c
+------
+void startNewGame :
+    Initialise un nouveau joueur, lui fait choisir un Supémon de départ et 
+    démarre la boucle principale du jeu.
+
+void gameLoop :
+    Gère la boucle principale du jeu, permettant au joueur de choisir 
+    différentes actions (combattre, acheter, soigner, sauvegarder et quitter).
+
+void chooseStarter :
+    Permet au joueur de choisir son Supémon de départ parmi plusieurs options.
+
+void saveGame :
+    Sauvegarde les données du joueur dans un fichier binaire savegame.dat.
+
+int loadGame :
+    Charge les données du joueur à partir du fichier binaire savegame.dat.
+
+player.c
+--------
+void createPlayer :
+    Initialise un nouveau joueur avec des valeurs par défaut et demande 
+    le nom du joueur.
+
+supemon.c
+---------
+Supemon createSupmander :
+    Crée et retourne un Supémon.
+
+Supemon createSupasaur :
+    Crée et retourne un Supémon.
+
+Supemon createSupirtle :
+    Crée et retourne un Supémon.
+
+Supemon createSupkachu :
+    Crée et retourne un Supémon.
+
+Supemon createSupaper :
+    Crée et retourne un Supémon.
+
+Supemon createSuparthur :
+    Crée et retourne un Supémon.
+
+Supemon createSupnoa :
+    Crée et retourne un Supémon.
+
+Supemon createSupenzo :
+    Crée et retourne un Supémon.
+
+Supemon getRandomPokemon :
+    Retourne un Supémon aléatoire d'un certain niveau (celui du Supémon du joueur).
+
+void gainExperience :
+    Fait gagner de l'expérience à un Supémon et gère la montée de niveau.
+
+battle.c
+--------
+void startWildBattle :
+    Démarre un combat contre un Supémon sauvage.
+
+void attaquerSupemon :
+    Gère une attaque entre deux Supémons, incluant les dégâts, les esquives et les effets.
+
+Supemon* changerSupemon :
+    Permet au joueur de changer de Supémon pendant un combat.
+
+void utiliserObjet :
+    Permet au joueur d'utiliser un objet sur un Supémon pendant un combat.
+
+void lancerCombat :
+    Gère le déroulement d'un combat entre un Supémon du joueur et un Supémon sauvage.
+
+item.c
+------
+void useRareCandy :
+    Utilise un Rare Candy pour faire monter un Supémon d'un niveau.
+
+void openShop :
+    Ouvre la boutique où le joueur peut acheter et vendre des objets.
+
+void sellItem :
+    Permet au joueur de vendre des objets à la boutique.
+
+void openSupemonCenter :
+    Ouvre le centre Supémon pour soigner tous les Supémons du joueur.

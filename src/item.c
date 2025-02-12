@@ -3,6 +3,12 @@
 #include "player.h"
 #include "item.h"
 
+void useRareCandy(Supemon *supemon) {
+    int experienceToNextLevel = 500 + (supemon->level - 1) * 1000;
+    supemon->experience += experienceToNextLevel;
+    gainExperience(supemon, 0); 
+}
+
 void openShop(Player* player) {
     int choice;
     printf("\nWelcome to the Shop!\n");

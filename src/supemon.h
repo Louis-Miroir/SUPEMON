@@ -14,8 +14,13 @@ typedef struct {
 } Supemon;
 
 Supemon createSupmander();
+Supemon createSupaper();
+Supemon createSupnoa();
+Supemon createSupenzo();
 Supemon createSupasaur();
 Supemon createSupirtle();
+Supemon createSuparthur();
+Supemon createSupkachu();
 Supemon getRandomPokemon(); 
 void gainExperience(Supemon *supemon, int experience); 
 

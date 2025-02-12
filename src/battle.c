@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "battle.h"
+#include "item.h"
 
 void startWildBattle(Player *player) {
     if (player->teamSize == 0) {
@@ -9,7 +11,7 @@ void startWildBattle(Player *player) {
         return;
     }
 
-    Supemon supemonSauvage = getRandomPokemon();
+    Supemon supemonSauvage = getRandomPokemon(player->team[0].level);
     printf("\nUn %s sauvage apparaît !\n", supemonSauvage.name);
 
     if (player->team[0].hp > 0) { // Supposons que le premier Supémon est actif
@@ -79,9 +81,14 @@ void utiliserObjet(Player *joueur, Supemon *supemon) {
         return;
     }
 
-    supemon->hp += joueur->items[choix - 1].effect;
-    if (supemon->hp > supemon->maxHp) supemon->hp = supemon->maxHp;
-    printf("%s a utilisé %s et a récupéré %d HP !\n", supemon->name, joueur->items[choix - 1].name, joueur->items[choix - 1].effect);
+    if (strcmp(joueur->items[choix - 1].name, "Rare Candy") == 0) {
+        useRareCandy(supemon);
+        printf("%s a utilisé %s et a gagné un niveau !\n", supemon->name, joueur->items[choix - 1].name);
+    } else {
+        supemon->hp += joueur->items[choix - 1].effect;
+        if (supemon->hp > supemon->maxHp) supemon->hp = supemon->maxHp;
+        printf("%s a utilisé %s et a récupéré %d HP !\n", supemon->name, joueur->items[choix - 1].name, joueur->items[choix - 1].effect);
+    }
 
     joueur->items[choix - 1].quantity--;
 

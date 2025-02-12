@@ -4,6 +4,7 @@
 #include <string.h>
 #include "supemon.h"
 
+// Création des Supémons existants
 Supemon createSupmander() {
     Supemon p;
     strcpy(p.name, "Supmander");
@@ -46,14 +47,94 @@ Supemon createSupirtle() {
     return p;
 }
 
-
-Supemon getRandomPokemon() {
-    int r = rand() % 3;
-    if (r == 0) return createSupmander();
-    if (r == 1) return createSupasaur();
-    return createSupirtle();
+Supemon createSupkachu() {
+    Supemon p;
+    strcpy(p.name, "Supkachu");
+    p.level = 1;
+    p.experience = 0;
+    p.hp = p.maxHp = 12;
+    p.attack = p.baseAttack = 1;
+    p.defense = p.baseDefense = 2;
+    p.evasion = p.baseEvasion = 2;
+    p.accuracy = p.baseAccuracy = 1;
+    p.speed = 1;
+    return p;
 }
 
+Supemon createSupaper() {
+    Supemon p;
+    strcpy(p.name, "Supaper");
+    p.level = 1;
+    p.experience = 0;
+    p.hp = p.maxHp = 8;
+    p.attack = p.baseAttack = 1;
+    p.defense = p.baseDefense = 1;
+    p.evasion = p.baseEvasion = 3;
+    p.accuracy = p.baseAccuracy = 1;
+    p.speed = 4;
+    return p;
+}
+
+Supemon createSuparthur() {
+    Supemon p;
+    strcpy(p.name, "Suparthur");
+    p.level = 1;
+    p.experience = 0;
+    p.hp = p.maxHp = 10;
+    p.attack = p.baseAttack = 1;
+    p.defense = p.baseDefense = 1;
+    p.evasion = p.baseEvasion = 2;
+    p.accuracy = p.baseAccuracy = 1;
+    p.speed = 2;
+    return p;
+}
+
+Supemon createSupnoa() {
+    Supemon p;
+    strcpy(p.name, "Supnoa");
+    p.level = 1;
+    p.experience = 0;
+    p.hp = p.maxHp = 14;
+    p.attack = p.baseAttack = 1;
+    p.defense = p.baseDefense = 1;
+    p.evasion = p.baseEvasion = 1;
+    p.accuracy = p.baseAccuracy = 1;
+    p.speed = 1;
+    return p;
+}
+
+Supemon createSupenzo() {
+    Supemon p;
+    strcpy(p.name, "Supenzo");
+    p.level = 1;
+    p.experience = 0;
+    p.hp = p.maxHp = 9;
+    p.attack = p.baseAttack = 1;
+    p.defense = p.baseDefense = 4;
+    p.evasion = p.baseEvasion = 2;
+    p.accuracy = p.baseAccuracy = 1;
+    p.speed = 1;
+    return p;
+}
+
+Supemon getRandomPokemon(int level) {
+    Supemon p;
+    int r = rand() % 7;  
+    if (r == 1) p = createSupasaur();
+    else if (r == 2) p = createSupirtle();
+    else if (r == 3) p = createSupkachu();
+    else if (r == 4) p = createSupnoa();
+    else if (r == 5) p = createSupenzo();
+    else if (r == 6) p = createSupmander();
+    else p = createSuparthur();
+
+    // Ajuster le niveau du Supémon sauvage
+    for (int i = 1; i < level; i++) {
+        gainExperience(&p, 500 + (i - 1) * 1000);
+    }
+
+    return p;
+}
 
 void gainExperience(Supemon *supemon, int experience) {
     supemon->experience += experience;
@@ -64,7 +145,6 @@ void gainExperience(Supemon *supemon, int experience) {
         supemon->level++;
         experienceToNextLevel = 500 + (supemon->level - 1) * 1000;
 
-        
         supemon->maxHp = (int)(supemon->maxHp * 1.3 + 0.5);
         supemon->attack = (int)(supemon->attack * 1.3 + 0.5);
         supemon->defense = (int)(supemon->defense * 1.3 + 0.5);
@@ -72,7 +152,6 @@ void gainExperience(Supemon *supemon, int experience) {
         supemon->accuracy = (int)(supemon->accuracy * 1.3 + 0.5);
         supemon->speed = (int)(supemon->speed * 1.3 + 0.5);
 
-       
         supemon->hp = supemon->maxHp;
 
         printf("%s a atteint le niveau %d !\n", supemon->name, supemon->level);

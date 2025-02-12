@@ -28,23 +28,45 @@ void attaquerSupemon(Supemon *attaquant, Supemon *defenseur, Player *joueur, int
         if (degats < 0) degats = 0;
         defenseur->hp -= degats;
         if (defenseur->hp < 0) defenseur->hp = 0;
-        printf("%s (Level %d, HP %d/%d) uses %s and deals %d damage to %s (Level %d, HP %d/%d)!\n",
-               attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp,
-               attack.name, degats,
-               defenseur->name, defenseur->level, defenseur->hp, defenseur->maxHp);
+        if (isWild) {
+            printf("Wild %s (Level %d, HP %d/%d) uses %s and deals %d damage to %s's %s (Level %d, HP %d/%d)!\n",
+                   attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp,
+                   attack.name, degats,
+                   joueur->name, defenseur->name, defenseur->level, defenseur->hp, defenseur->maxHp);
+        } else {
+            printf("%s's %s (Level %d, HP %d/%d) uses %s and deals %d damage to Wild %s (Level %d, HP %d/%d)!\n",
+                   joueur->name, attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp,
+                   attack.name, degats,
+                   defenseur->name, defenseur->level, defenseur->hp, defenseur->maxHp);
+        }
     }
     if (attack.effect == 1) {
         attaquant->attack++;
-        printf("%s (Level %d, HP %d/%d) uses %s and increases its attack!\n",
-               attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        if (isWild) {
+            printf("Wild %s (Level %d, HP %d/%d) uses %s and increases its attack!\n",
+                   attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        } else {
+            printf("%s's %s (Level %d, HP %d/%d) uses %s and increases its attack!\n",
+                   joueur->name, attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        }
     } else if (attack.effect == 2) {
         attaquant->evasion++;
-        printf("%s (Level %d, HP %d/%d) uses %s and increases its evasion!\n",
-               attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        if (isWild) {
+            printf("Wild %s (Level %d, HP %d/%d) uses %s and increases its evasion!\n",
+                   attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        } else {
+            printf("%s's %s (Level %d, HP %d/%d) uses %s and increases its evasion!\n",
+                   joueur->name, attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        }
     } else if (attack.effect == 3) {
         attaquant->defense++;
-        printf("%s (Level %d, HP %d/%d) uses %s and increases its defense!\n",
-               attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        if (isWild) {
+            printf("Wild %s (Level %d, HP %d/%d) uses %s and increases its defense!\n",
+                   attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        } else {
+            printf("%s's %s (Level %d, HP %d/%d) uses %s and increases its defense!\n",
+                   joueur->name, attaquant->name, attaquant->level, attaquant->hp, attaquant->maxHp, attack.name);
+        }
     }
 }
 
@@ -99,8 +121,8 @@ void utiliserObjet(Player *joueur, Supemon *supemon) {
 }
 
 void lancerCombat(Supemon *supemonJoueur, Supemon *supemonSauvage, Player *joueur) {
-    printf("\nA battle begins between your %s (Level %d, HP %d/%d) and the wild %s (Level %d, HP %d/%d)!\n",
-           supemonJoueur->name, supemonJoueur->level, supemonJoueur->hp, supemonJoueur->maxHp,
+    printf("\nA battle begins between %s's %s (Level %d, HP %d/%d) and the wild %s (Level %d, HP %d/%d)!\n",
+           joueur->name, supemonJoueur->name, supemonJoueur->level, supemonJoueur->hp, supemonJoueur->maxHp,
            supemonSauvage->name, supemonSauvage->level, supemonSauvage->hp, supemonSauvage->maxHp);
 
     while (supemonJoueur->hp > 0 && supemonSauvage->hp > 0) {
@@ -119,17 +141,17 @@ void lancerCombat(Supemon *supemonJoueur, Supemon *supemonSauvage, Player *joueu
 
         switch (choix) {
             case 1:
-                attaquerSupemon(supemonJoueur, supemonSauvage, joueur, 1, 0);
+                attaquerSupemon(supemonJoueur, supemonSauvage, joueur, 0, 0);
                 break;
             case 2:
-                attaquerSupemon(supemonJoueur, supemonSauvage, joueur, 1, 1);
+                attaquerSupemon(supemonJoueur, supemonSauvage, joueur, 0, 1);
                 break;
             case 3: {
                 Supemon *nouveauSupemon = changerSupemon(joueur);
                 if (nouveauSupemon != NULL) {
                     supemonJoueur = nouveauSupemon;
-                    printf("You switched to %s (Level %d, HP %d/%d)!\n",
-                           supemonJoueur->name, supemonJoueur->level, supemonJoueur->hp, supemonJoueur->maxHp);
+                    printf("You switched to %s's %s (Level %d, HP %d/%d)!\n",
+                           joueur->name, supemonJoueur->name, supemonJoueur->level, supemonJoueur->hp, supemonJoueur->maxHp);
                 }
                 break;
             }
@@ -163,13 +185,13 @@ void lancerCombat(Supemon *supemonJoueur, Supemon *supemonSauvage, Player *joueu
 
         if (supemonSauvage->hp > 0) {
             printf("\n--- Wild Supémon's Turn ---\n");
-            attaquerSupemon(supemonSauvage, supemonJoueur, joueur, 0, rand() % 2);
+            attaquerSupemon(supemonSauvage, supemonJoueur, joueur, 1, rand() % 2);
         }
     }
 
     if (supemonJoueur->hp <= 0) {
-        printf("\nYour %s (Level %d, HP %d/%d) is K.O.! You lost the fight.\n",
-               supemonJoueur->name, supemonJoueur->level, supemonJoueur->hp, supemonJoueur->maxHp);
+        printf("\nYour %s's %s (Level %d, HP %d/%d) is K.O.! You lost the fight.\n",
+               joueur->name, supemonJoueur->name, supemonJoueur->level, supemonJoueur->hp, supemonJoueur->maxHp);
     } else {
         printf("\nThe wild %s (Level %d, HP %d/%d) is K.O.! You won the fight.\n",
                supemonSauvage->name, supemonSauvage->level, supemonSauvage->hp, supemonSauvage->maxHp);
